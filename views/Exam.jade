@@ -1,0 +1,98 @@
+doctype html
+html
+	head
+		title= title
+		include ./partials/head.jade
+		include ./header.jade
+		style.
+			canvas {
+			   -webkit-transform: scale(0.99);  
+			   -moz-transform: scale(0.99);  
+			   border: 1px #d8d8d solid; 
+			}
+		script(src='http://localhost:3000/stylesheets/flat/dist/js/vendor/jquery.min.js')			
+	body
+		-if(quest == null)
+			.container
+				h1
+					i.fa.fa-frown-o
+					| &nbsp; Exam is not set yet! Visit again later
+		-else
+			.container
+				#Exam
+					.row
+						.col-md-9(id= quest._id)
+							label.question #{quest.Question}
+							br
+							input(type='radio',name='question',value='A')
+							label.option1.opt #{quest.Option1}
+							br
+							input(type='radio',name='question',value='B')
+							label.option2.opt #{quest.Option2}
+							br
+							input(type='radio',name='question',value='C')
+							label.option3.opt #{quest.Option3}
+							br
+							input(type='radio',name='question',value='D')
+							label.option4.opt #{quest.Option4}
+							br
+							input.hidden(type='radio',name='question', checked='checked', value='E')
+							br
+							input#submitAnswer.btn.btn-default(type='submit',value='Submit now')
+						.col-md-3
+							canvas#timer(data-seconds="30")
+				.score
+					p
+			include ./partials/jscripts.jade
+			script.
+				window.onload = function() {
+				        canvas  = document.getElementById('timer'),
+				        ctx     = canvas.getContext('2d'), 
+				        sec     = $(canvas).data('seconds') | 0,
+				        countdown = sec;
+
+				    ctx.lineWidth = 8;
+				    ctx.strokeStyle = "#9a9ca3";
+				    ctx.fillStyle = '#666666';
+				    ctx.textAlign = 'center';
+				    ctx.font      = '20px Arial';
+				    ctx.fillText(countdown, 50,58);
+
+				    var 
+				    startAngle = (-Math.PI/2), 
+				    time       = 0,
+				    intv       = setInterval(function(){
+				      
+				        var endAngle = (Math.PI * time * 2 / sec) - Math.PI/2;
+				        ctx.arc(50, 50, 35, startAngle , endAngle, false);   
+				        startAngle = endAngle;
+				        ctx.stroke();
+				        
+				        ctx.clearRect(30, 35, 35, 35);
+				        ctx.fillText(countdown--, 50, 58);
+				        
+				        if (++time > sec) {
+
+				        	clearInterval(intv); 
+
+				        	$('#Exam').hide();
+
+				        	$.ajax({
+				        		url:'/course/score',
+				        		type:'post',
+				        		success: function(data){				
+				        			$('.score p').text("You scored : " + data.score);
+				        		},
+				        		error: function(jqXhr, textStatus, errorThrown){
+				        			alert("Error");
+				        		}
+				        	});
+
+				        }
+				           
+				    }, 1000);
+				    
+				}	
+
+
+        

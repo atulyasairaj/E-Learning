@@ -1,0 +1,105 @@
+doctype html
+html
+	head
+		include ./partials/head.jade
+		title= title
+	body
+		include ./header.jade
+		#view-course.container.pageContent
+			.col-md-3.col-sm-3
+				#item-header-content
+					.instructor_course
+						.item-avatar
+							img#view-course-image.avatar.user-1-avatar.avatar-photo(width='150', height='150', alt='Profile Photo')
+					.instructor
+						h4 INSTRUCTOR
+					h5.course_instructor #{user.name}
+			.col-md-6.col-sm-6
+				#item-body
+					.course-title
+						h1 #{course.Title}
+					.couse-intro
+						h5 #{course.Details.Intro}
+					.course-video
+						video#course-video(controls, style='width:100%')
+							//source(src='')
+					.menu-item.aplha
+						h3 Course Description
+						li #{course.Details.Description}
+					.menu-item
+						h3 What are the requirements?
+						li #{course.Details.Prerequisites}
+					.menu-item
+						h3 Agenda
+						li  #{course.Details.Agenda}
+						
+			.col-md-3.col-sm-3
+				#view-rsidebar.pricing 
+					.right-top.take-course.text-center
+						h4 Start: #{course.Details.StartDate.toDateString()}
+						h4  End: #{course.Details.EndDate.toDateString()}
+						hr
+						h4 Session
+						span Start: #{course.Details.Session[0].Start}
+						br
+						span End: #{course.Details.Session[0].End}
+						br
+						hr
+						if(course.Free)
+							label $ 0
+						br
+						-if(enrolled == true)
+							button.btn-success.take-course.btn-action(id= course._id type='button') Registered
+						-else
+							button.enroll-btn.take-course.btn-action(id= course._id type='button') Register					
+						br
+						br
+						label
+							-for(var i=1; i <= 5; i++)
+								-if(i<= Feedback[0].OverallAvg)
+									i.fa.fa-star.fa-2x.gold
+								-else
+									i.fa.fa-star.fa-2x.gold.text-muted
+						br
+						a(href='/course/viewfeedback/' + course._id) Review
+		include ./partials/jscripts.jade
+		include footer.jade
+	script.
+		
+		(function (document) {
+			var img_path = "#{course.Details.Image_Path}",
+				vid_path = '#{course.Details.Video_Path}';
+
+				client.on('open', function(stream){
+					var stream_img = client.send({}, {event:'image', path: img_path});
+					var stream_vid = client.send({}, {event:'video', path: vid_path});
+
+				});
+				client.on('stream', function(stream, meta){
+					// Buffer for parts
+					if(meta.image){
+						var parts = [];
+						// Got new data
+						stream.on('data', function(data){
+							parts.push(data);
+						});
+						stream.on('end', function(){
+							// Display new data in browser!
+							var img = document.getElementById("view-course-image");
+							img.src = (window.URL || window.webkitURL).createObjectURL(new Blob(parts));
+						});
+					} else {
+						var parts = [];
+						// Got new data
+						stream.on('data', function(data){
+							parts.push(data);
+						});
+						stream.on('end', function(){
+							// Display new data in browser!
+							var vid = document.getElementById("course-video");
+							vid.src = (window.URL || window.webkitURL).createObjectURL(new Blob(parts));
+						});
+					}
+				});
+		})(document);
+

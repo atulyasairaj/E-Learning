@@ -1,0 +1,84 @@
+doctype html
+html
+	head
+		title= title
+		include ./partials/head.jade
+		include ./header.jade
+		//- script(src='http://localhost:3000/javascripts/rtc.min.js')
+		//- script(src="http://localhost:9000/socket.io/socket.io.js")
+		//- script(src='http://localhost:3000/stylesheets/flat/dist/js/vendor/jquery.min.js')			
+	body
+		#write-review.container
+			.col-xs-1.col-lg-1
+			.col-xs-10.col-lg-10
+				ul.row
+					li.col-xs-3#colors-block
+						p.graph-block.block1-color The Objectives were clearly communicated
+						p.graph-block.block2-color The content of the training supported the objectives
+						p.graph-block.block3-color The topics were well organized
+						p.graph-block.block4-color The course length was appropriate for the information presented
+						p.graph-block.block5-color The facilitator created a professional and comfortable learning environment
+						p.graph-block.block6-color The facilitator displayed confidence in the subject matter
+						p.graph-block.block7-color The facilitator promoted critical thinking and self-directed learning
+						
+					li.col-xs-8
+						.graph-area
+							canvas#myBarChart(width="600" height="500")
+
+				.row
+					.col-xs-12
+						h1.comment Comments
+						hr
+						ul.list-group
+							if(comments!=null)
+								each comment in comments.Feedback
+									.list-group-item
+										li.personname
+											label #{comment.user_id}
+											i.date-time #{comment.date.toDateString()}
+								
+										li
+											label
+												-for(var i=1; i <= 5; i++)
+													-if(i<= comment.overall)
+														i.fa.fa-star.fa-2x.gold
+													-else
+														i.fa.fa-star.fa-2x.gold.text-muted
+											p #{comment.Comment}
+			.col-xs-1.col-lg-1
+			include ./partials/jscripts.jade
+			script.
+				/*feedback graph*/
+					var ctx = $("#myBarChart").get(0).getContext("2d");
+
+					var values = ['#{ratings[0].objectivesAvg}', '#{ratings[0].contentAvg}','#{ratings[0].topicsAvg}','#{ratings[0].course_lengthAvg}','#{ratings[0].learning_enrmntAvg}','#{ratings[0].subject_matterAvg}','#{ratings[0].self_learningAvg}'];
+					
+					
+
+					var data = {
+					labels: ["1", "2", "3", "4", "5", "6", "7"],
+					datasets: [
+						{
+							label: "My First dataset",
+							yAxisLabel : "Title of Y Axis",
+							yAxisMinimumInterval : 1,
+							fillColor: ["#54FF9F","#446CB3","#EE0000","#55141C","#0BB5FF","#FF6103","#3EA055"],
+							strokeColor: "rgba(220,220,220,0.8)",
+							highlightFill: "rgba(220,220,220,0.75)",
+							highlightStroke: "rgba(220,220,220,1)",
+							data: values
+						}
+					]
+				};
+				var myBarChart = new Chart(ctx).Bar(data);
+
+				var width = $('canvas').parent().width();
+					$('canvas').attr("width",width);
+					new Chart(ctx).Bar(data, {
+						scaleOverride: true,
+						scaleSteps: 5,
+						scaleStepWidth: 1,
+						scaleStartValue: 0
+					});
+					
+				/*feedback graph ends*/

@@ -1,0 +1,283 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Welcome To E-Learning
+    // Bootstrap Core CSS
+    link(rel='stylesheet', href='template/css/bootstrap.min.css', type='text/css')
+    // Custom Fonts
+    link(rel='stylesheet', href='stylesheets/font-awesome/css/font-awesome.min.css', type='text/css')
+    // Plugin CSS
+    link(rel='stylesheet', href='template/css/animate.min.css', type='text/css')
+    // Custom CSS
+    link(rel='stylesheet', href='template/css/creative.css', type='text/css')
+    link(rel="icon" href="/images/favicon-mortar-board.ico" type="image/gif" sizes="16x16")
+    style.
+      .help-inline{
+        color:red;
+      }
+  body#page-top(style='overflow-y:hidden;')
+    -if(isLoggedIn == false || !isLoggedIn)
+      nav#mainNav.navbar.navbar-default.navbar-fixed-top
+        .container-fluid
+          // Brand and toggle get grouped for better mobile display
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand.page-scroll(href='#page-top')
+              i.fa.fa-x.fa-graduation-cap 
+                span E-Learning
+          // Collect the nav links, forms, and other content for toggling
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right
+              li
+                a.page-scroll(href='#about') About
+              li
+                a.page-scroll(href='#services') Services
+              li
+                a.page-scroll(href='#portfolio') Courses
+              li
+                a.page-scroll(href='#contact') Contact
+              .navbar-form.navbar-left
+                button.btn.btn-default.btn-border#login-button(type='button' data-toggle='modal' data-target='#loginModal') Sign In
+                form.navbar-left(action="/signup")
+                  button.btn.btn-default.btn-border(type="submit") Sign Up
+    -else
+      nav#mainNav.navbar.navbar-default.navbar-fixed-top
+        .container-fluid
+          // Brand and toggle get grouped for better mobile display
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand.page-scroll(href='#page-top')
+              i.fa.fa-x.fa-graduation-cap 
+                span E-Learning
+          // Collect the nav links, forms, and other content for toggling
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right
+              li
+                a.page-scroll(href=type) Profile
+              li
+                a.page-scroll(href='#about') About
+              li
+                a.page-scroll(href='#services') Services
+              li
+                a.page-scroll(href='#portfolio') Courses
+              li
+                a.page-scroll(href='#contact') Contact
+              .navbar-form.navbar-left
+                button.btn.btn-default#logout(type='button') Logout
+    header
+      .header-content
+        .header-content-inner
+          h1 Welcome To E-Learning
+          hr
+          h3
+            | What course will your life take?
+            br
+            h3
+              h4 Own your future by learning new skills online
+              a.btn.btn-primary.btn-xl.page-scroll(href='#about') Find Out More
+    section#about.bg-primary
+      .container
+        .row
+          .col-lg-8.col-lg-offset-2.text-center
+            h2.section-heading We've got what you need!
+            hr.light
+            p.text-faded
+              | At E-Learning, we believe in the highest quality education.
+              br
+              |                     It was created for students and institutions that seek to transform themselves through cutting-edge technologies, innovative pedagogy, and rigorous courses.
+            a.btn.btn-default.btn-xl.page-scroll.wow.tada(href='#portfolio') Get Started!
+    section#services
+      .container
+        .row
+          .col-lg-12.text-center
+            h2.section-heading At Your Service
+            hr.primary
+      .container
+        .row
+          .col-lg-3.col-md-6.text-center
+            .service-box
+              i.fa.fa-4x.fa-group.wow.bounceIn.text-primary
+              h3 Professional Education
+              p.text-muted Advance your career with professional education
+          .col-lg-3.col-md-6.text-center
+            .service-box
+              i.fa.fa-4x.fa-user-plus.wow.bounceIn.text-primary(data-wow-delay='.1s')
+              h3 Teach
+              p.text-muted
+                | Reach millions of students worldwide and deliver your course on any device, at any time
+          .col-lg-3.col-md-6.text-center
+            .service-box
+              i.fa.fa-4x.fa-newspaper-o.wow.bounceIn.text-primary(data-wow-delay='.2s')
+              h3 Up to Date
+              p.text-muted Courses in a wide variety of subject areas
+          .col-lg-3.col-md-6.text-center
+            .service-box
+              i.fa.fa-4x.fa-heart.wow.pulse.text-primary(data-wow-delay='.3s')
+              h3 Made with Love
+              p.text-muted
+                | Made in 
+                i.fa.fa-x.fa-heart.text-primary(style='color:red')
+                |  with Goa!
+    section#portfolio.no-padding
+      .container
+        .row
+          .col-lg-12.text-center
+            h2.section-heading Avaliable Courses
+            hr.primary
+      .container-fluid
+        .row.no-gutter
+          .col-lg-4.col-sm-6
+            a.portfolio-box.text-center(href='/course/category/Web Development')
+              i.fa.fa-4x.fa-globe.text-primary.wow.rollIn
+              p Learn Developing Websites
+              .portfolio-box-caption
+                .portfolio-box-caption-content
+                  .project-name
+                    | Web Development
+          .col-lg-4.col-sm-6
+            a.portfolio-box.text-center(href='/course/category/Cloud Computing')
+              i.fa.fa-4x.fa-cloud.text-primary.wow.flip
+              p Learn Cloud Computing
+              .portfolio-box-caption
+                .portfolio-box-caption-content
+                  .project-name
+                    | Cloud Computing
+          .col-lg-4.col-sm-6
+            a.portfolio-box.text-center(href='/course/category/Mobile Development')
+              i.fa.fa-4x.fa-mobile.text-primary.wow.bounceInRight
+              p Learn Mobile Development
+              .portfolio-box-caption
+                .portfolio-box-caption-content
+                  .project-name
+                    | Mobile Development
+          .col-lg-4.col-sm-6
+            a.portfolio-box.text-center(href='/course/category/Database')
+              i.fa.fa-4x.fa-database.text-primary.wow.bounceInLeft
+              p Learn Database Management
+              .portfolio-box-caption
+                .portfolio-box-caption-content
+                  .project-name
+                    | Database
+          .col-lg-4.col-sm-6
+            a.portfolio-box.text-center(href='/course/category/Music')
+              i.fa.fa-4x.fa-music.text-primary.wow.shake
+              p Learn Music
+              .portfolio-box-caption
+                .portfolio-box-caption-content
+                  .project-name
+                    | Music
+          .col-lg-4.col-sm-6
+            a.portfolio-box.text-center(href='/course/category/Photography')
+              i.fa.fa-4x.fa-camera.text-primary.wow.lightSpeedIn
+              p Learn Photography
+              .portfolio-box-caption
+                .portfolio-box-caption-content
+                  .project-name
+                    | Photography
+    section#contact
+      .container
+        .row
+          .col-lg-8.col-lg-offset-2.text-center
+            h2.section-heading Let's Get In Touch!
+            hr.primary
+            p Didn’t get anything? Get in touch with our support team.
+          .col-lg-4.col-lg-offset-2.text-center
+            i.fa.fa-phone.fa-3x.wow.bounceIn
+            p 123-456-6789
+          .col-lg-4.text-center
+            i.fa.fa-envelope-o.fa-3x.wow.bounceIn(data-wow-delay='.1s')
+            p
+              a(href='mailto:feedback@elearning.com') feedback@elearning.com
+    //Modal
+    #loginModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal')
+                      span(aria-hidden='true') &times;
+                      span.sr-only Close
+                    h4#myModalLabel.modal-title
+                    .text-center Sign In
+                  .modal-body
+                      form#login-form
+                        .form-group
+                          label Email
+                          //.input-group.margin-bottom-sm
+                           span.input-group-addon
+                            i.fa.fa-envelope-o.fa-fw
+                          input.form-control.email(type='email', name='email', required)
+                        .form-group
+                          label Password
+                          //.input-group
+                           span.input-group-addon
+                            i.fa.fa-key.fa-fw
+                          input.form-control.password(type='password', name='password', required)
+                        button#login.btn.center-block(type='submit') Sign In
+                        #error-login.alert.alert-danger.hidden(role='alert')
+                        hr
+                      form
+                        .form-login.text-center
+                              a.btn.btn-facebook(href='/auth/facebook')
+                                 span.fa.fa-facebook
+                                 |  Facebook
+                              a.btn.btn-twitter(href='/auth/twitter')
+                                 span.fa.fa-twitter
+                                 |  Twitter
+                              a.btn.btn-google(href='/auth/google')
+                                 span.fa.fa-google-plus
+                                 |  Google+  
+                            
+                  .modal-footer
+                    p.text-center
+                      strong No account yet?
+                      | &#x9;  
+                      a(href='/signup') Sign up.
+
+    // jQuery
+    script(src='template/js/jquery.js')
+    // Bootstrap Core JavaScript
+    script(src='template/js/bootstrap.min.js')
+    // Plugin JavaScript
+    script(src='template/js/jquery.easing.min.js')
+    script(src='template/js/jquery.fittext.js')
+    script(src='template/js/wow.min.js')
+    // Custom Theme JavaScript
+    script(src='template/js/creative.js')
+
+    //My Js file
+    script(src="javascripts/binary.js")
+    script(src='javascripts/jquery.validate.js')
+    script(src='javascripts/script.js')
+    script.
+      (function (document) {
+        function getUrlParameter(sParam)
+        {
+          var sPageURL = window.location.search.substring(1);
+          var sURLVariables = sPageURL.split('&');
+          for (var i = 0; i < sURLVariables.length; i++) 
+          {
+              var sParameterName = sURLVariables[i].split('=');
+              if (sParameterName[0] == sParam) 
+              {
+                  return sParameterName[1];
+              }
+          }
+        }   
+        if(getUrlParameter('redirect'))
+          $('#login-button').click();
+      })(document);
+    
+    //include footer.jade

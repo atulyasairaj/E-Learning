@@ -1,0 +1,25 @@
+extends layout
+
+block content
+	.col-md-2.col-sm-2
+	.col-md-8.col-sm-8
+		
+		
+		.list-group
+			.list-group-item
+				p #{course.Title}
+					a.pull-right(href='/course/video/'+ course._id data-toggle="tooltip" data-placement="right" title="Video Broadcasting" style="margin-left:5px;")
+						i.fa.fa-video-camera.fa-3x
+					a.pull-right(href='/course/exam/' + course._id data-toggle="tooltip" data-placement="top" title="Answer Exam" style="margin-left:5px;")
+						i.fa.fa-th-list.fa-3x
+					a.pull-right(href='/course/writefeedback/' + course._id data-toggle="tooltip" data-placement="left" title="Write Feedback" style="margin-left:5px;")
+						i.fa.fa-comments-o.fa-3x
+			ul.courseware-list
+				each content in course.Content
+					li.list-group-item
+						label #{content.note_name}
+						.content-download
+							label
+								a(href="/course/download/" + content.note_name)
+									i.fa.fa-download.fa-2x			
+	.col-md-2.col-sm-2

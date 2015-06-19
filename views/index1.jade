@@ -1,0 +1,178 @@
+extends layout
+
+block content  
+    #main-area.container
+      .color_blocks
+        .container_16
+          .blocks
+            #div.subject_toggle.flip-container.block1
+              a.flipper(href='/course/')
+                .front
+                  p
+                    span &nbsp;
+                    span.fa.fa-globe.fa-5x 
+                    h3 Web                        
+                .back
+                  p
+                    strong 370
+                    span COURSES
+                    strong 15,897
+                    span VIDEO TUTORIALS
+            #div.subject_toggle.flip-container.block2
+              a.flipper(href='#')
+                .front
+                 p
+                    span &nbsp;
+                    span.fa.fa-cloud.fa-5x
+                    h3 Cloud                          
+                .back
+                  p
+                    strong 370
+                    span COURSES
+                    strong 15,897
+                    span VIDEO TUTORIALS
+            #div.subject_toggle.flip-container.block3
+              a.flipper(href='#')
+                .front
+                  p
+                    span &nbsp;
+                    span.fa.fa-mobile.fa-5x
+                    h3 Mobile                       
+                .back
+                  p
+                    strong 370
+                    span COURSES
+                    strong 15,897
+                    span VIDEO TUTORIALS
+            #div.subject_toggle.flip-container.block4
+              a.flipper(href='#')
+                .front
+                  p
+                    span &nbsp;
+                    span.fa.fa-video-camera.fa-5x
+                    h3 Video                      
+                .back
+                  p
+                    strong 370
+                    span COURSES
+                    strong 15,897
+                    span VIDEO TUTORIALS
+            #div.subject_toggle.flip-container.block5
+              a.flipper(href='/course/category/Database')
+                .front
+                  p
+                    span &nbsp;
+                    span.fa.fa-database.fa-5x
+                    h3 Database                  
+                .back
+                  p
+                    strong 370
+                    span COURSES
+                    strong 15,897
+                    span VIDEO TUTORIALS
+            #div.subject_toggle.flip-container.block6
+              a.flipper(href='#')
+                .front
+                 p
+                    span &nbsp;
+                    span.fa.fa-camera.fa-5x 
+                    h3 Photo                       
+                .back
+                  p
+                    strong 370
+                    span COURSES
+                    strong 15,897
+                    span VIDEO TUTORIALSS
+
+            #div.subject_toggle.flip-container.block7
+              a.flipper(href='#')
+                .front
+                  p
+                    span &nbsp;
+                    span.fa.fa-music.fa-5x
+                    h3 Music                    
+                .back
+                  p
+                    strong 370
+                    span COURSES
+                    strong 15,897
+                    span VIDEO TUTORIALS
+            #div.subject_toggle.flip-container.block8
+              a.flipper(href='#')
+                .front
+                  span &nbsp;
+                  |                         
+                .back
+                  p
+                    strong 370
+                    span COURSES
+                    strong 15,897
+                    span VIDEO TUTORIALS
+            #div.subject_toggle.flip-container.block9
+              a.flipper(href='#')
+                .front
+                  span &nbsp;
+                  |                         
+                .back
+                  p
+                    strong 370
+                    span COURSES
+                    strong 15,897
+                    span VIDEO TUTORIALS
+           
+            .black &nbsp;
+              ul#reister-btn
+                li
+                  a.btn-action(href='http://localhost:3000/signup') Sign Up 
+    
+    .container
+       // Modal
+      #loginModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal')
+                      span(aria-hidden='true') &times;
+                      span.sr-only Close
+                    h4#myModalLabel.modal-title
+                    .text-center Login
+                  .modal-body
+                      form
+                        .form-group
+                          label Email
+                          .input-group.margin-bottom-sm
+                           span.input-group-addon
+                            i.fa.fa-envelope-o.fa-fw
+                           input.form-control.email(type='email', name='email', required)
+                        .form-group
+                          label Password
+                          .input-group
+                           span.input-group-addon
+                            i.fa.fa-key.fa-fw
+                           input.form-control.password(type='password', name='password', required)
+                        button#login.center-block.btn-action(type='submit') Login
+                        #error-login.alert.alert-danger.hidden(role='alert')
+                        hr
+                      form
+                        .form-login.text-center
+                              a.btn.btn-facebook(href='/auth/facebook')
+                                 span.fa.fa-facebook
+                                 |  Facebook
+                              a.btn.btn-twitter(href='/auth/twitter')
+                                 span.fa.fa-twitter
+                                 |  Twitter
+                              a.btn.btn-google(href='/auth/google')
+                                 span.fa.fa-google-plus
+                                 |  Google+  
+                            
+                  .modal-footer
+                    p.text-center
+                      strong No account yet?
+                      | &#x9;  
+                      a(href='/signup') Sign up.
+    
+
+          
+
+
+                

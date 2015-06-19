@@ -1,0 +1,126 @@
+extends layout
+
+block content      
+    .container
+      .col-sm-6.col-sm-offset-3
+        h1
+          span.fa.fa-sign-in
+          | Signup
+        br
+        #error-register.alert.hidden(role='alert')
+        form#signup
+          .form-group
+            label Email
+            input.form-control.email(type='email', name='email', required)
+          .form-group
+            label.control-label Password
+            input.form-control.password#password(type='password', name='password' required)
+          .form-group
+            label.control-label Repeat Password
+            input.form-control.repeatpassword(type='password', name='repeatpassword' required)
+          .form-group
+            label Name
+            input.form-control.name(type='text', name='name' required)
+          .form-group
+            label Occupation
+            input.form-control.occupation(type='text', name='occupation' required)
+          .form-group
+            label Country
+            select#countryselect.form-control.country(name='country' required)
+              option(value='Afghanistan') Afghanistan
+              option(value='Argentina') Argentina
+              option(value='Australia') Australia
+              option(value='Bangladesh') Bangladesh
+              option(value='Brazil') Brazil
+              option(value='Canada') Canada
+              option(value='China') China
+              option(value='Finland') Finland
+              option(value='France') France
+              option(value='Germany') Germany
+              option(value='Hong Kong') Hong Kong
+              option(value='Hungary') Hungary
+              option(value='Iceland') Iceland
+              option(value='India') India
+              option(value='Indonesia') Indonesia
+              option(value='Iraq') Iraq
+              option(value='Ireland') Ireland
+              option(value='Italy') Italy
+              option(value='Kuwait') Kuwait
+              option(value='Malaysia') Malaysia
+              option(value='Maldives') Maldives
+              option(value='Mauritania') Mauritania 
+              option(value='Mauritius') Mauritius
+              option(value='Mexico') Mexico
+              option(value='Myanmar') Myanmar
+              option(value='Nepal') Nepal
+              option(value='New Zealand') New Zealand
+              option(value='Pakistan') Pakistan
+              option(value='Philippines') Philippines
+              option(value='Qatar') Qatar
+              option(value='Russian Federation') Russian Federation
+              option(value='Saudi Arabia') Saudi Arabia
+              option(value='South Africa') South Africa
+              option(value='Spain') Spain
+              option(value='Sri Lanka') Sri Lanka
+              option(value='Swaziland') Swaziland
+              option(value='Sweden') Sweden
+              option(value='Switzerland') Switzerland
+              option(value='United Arab Emirates') United Arab Emirates
+              option(value='United Kingdom') United Kingdom
+              option(value='United States') United States
+              option(value='Zimbabwe') Zimbabwe
+          .form-group
+            label Date of Birth
+            input.form-control.date(type='date', name='date' required)
+          .form-group
+            button.btn.btn-action.btn-block(type='submit') Sign up
+          
+        hr
+        p
+          | Already have an account?
+          a(href="/") Login
+      // Modal
+      #loginModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal')
+                      span(aria-hidden='true') &times;
+                      span.sr-only Close
+                    h4#myModalLabel.modal-title
+                    .text-center Login
+                  .modal-body
+                      form
+                        .form-group
+                          label Email
+                           .input-group.margin-bottom-sm
+                            span.input-group-addon
+                             i.fa.fa-envelope-o.fa-fw
+                            input.form-control.email(type='text', name='email')
+                        .form-group
+                          label Password
+                           .input-group
+                            span.input-group-addon
+                             i.fa.fa-key.fa-fw
+                            input.form-control.password(type='password', name='password')
+                        button#login.btn.btn-action.btn-block(type='submit') Login
+                        #error-login.alert.alert-danger.hidden(role='alert')
+                        hr
+                      form
+                        .form-login.text-center
+                              a.btn.btn-facebook(href='/auth/facebook')
+                                 span.fa.fa-facebook
+                                 |  Facebook
+                              a.btn.btn-twitter(href='/auth/twitter')
+                                 span.fa.fa-twitter
+                                 |  Twitter
+                              a.btn.btn-google(href='/auth/google')
+                                 span.fa.fa-google-plus
+                                 |  Google+  
+                            
+                  .modal-footer
+                    p.text-center
+                      strong No account yet?
+                      | &#x9;  
+                      a(href='/signup') Sign up.
+          

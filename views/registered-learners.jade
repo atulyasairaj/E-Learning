@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	.col-md-2.col-sm-2
+	.col-md-8.col-sm-8
+		h3 Learners List
+		hr
+		ul.list-group
+			if(students!=null)
+				each student in students					
+					li.row.list-group-item
+						.col-md-3
+							img.img-responsive.img-rounded(src='/images/profile.jpg', width="150" alt='no photo')                
+						.col-md-5
+							h4.learner-list-name.text-uppercase #{student.U_id}              
+						.col-md-2
+							a.learner-list-btn.btn.btn-action(href='#')
+								| View Profile 
+	.col-md-2.col-sm-2

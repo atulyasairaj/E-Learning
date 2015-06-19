@@ -1,0 +1,11 @@
+doctype html
+html
+    include ./partials/head.jade
+    title= title
+    include ./header.jade    
+  body
+    .se-pre-con
+    .pageContent
+         block content
+    include ./partials/jscripts.jade  
+    include footer.jade

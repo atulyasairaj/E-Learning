@@ -1,0 +1,29 @@
+extends layout
+
+block content
+	#list-courses.container
+		.col-md-2.col-sm-2
+
+		.col-md-8.col-sm-8
+				form
+					label#search-icon
+						i.fa.fa-search.fa-2x
+					input#search-box.form-control.input-lg(placeholder='Search for...', tabindex='1', style='position: relative; background-color: transparent;')
+				#list-body
+					table.table.table-hover
+						each course in courses
+							tr
+								td
+									.list_img_thumbnail
+										img(src= course.Details.Image_Path)
+										br
+								td
+									a.course_title(href='/course/viewcourse/' + course._id) #{course.Title}
+									p.giveMeEllipsis #{course.Details.Description}
+									br
+									em #{course.Details.Level} &nbsp &nbsp &nbsp
+									if(course.Free)
+										em Free
+									else
+										em Paid
+		.col-md-2.col-sm-2

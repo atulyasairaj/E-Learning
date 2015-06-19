@@ -1,0 +1,139 @@
+doctype html
+html
+  head
+    include ./partials/head.jade
+    title= title
+  body
+    #admin-header
+      nav.navbar.navbar-default.navbar-fixed-top
+        .container
+          // Brand and toggle get grouped for better mobile display
+          .navbar-header
+            a.navbar-brand(href='/')
+              strong E-Learning            
+          ul.nav.navbar-nav.navbar-right
+            li
+              a#notification              
+                i.fa.fa-bell
+                |   
+                span.label.label-primary.notification-count             
+            li
+              a#logout(href='#')
+                i.fa.fa-sign-out &nbsp;Logout
+        
+      #admin
+        .row
+          .col-md-2.col-sm-4
+            .pagetitle
+              #item-header
+                #item-header-avatar
+                  
+                #item-header-content
+                  
+                #item-nav
+                  #object-nav
+                    ul
+                      li#dashboard-personal-li.active
+                        a(href='#admin-dashboard') Dashboard
+                      li#profile-personal-li
+                        a(href='#notification-admin') Notifications
+                      li#course-personal-li
+                        a(href='#courses-approval') Course Approval                       
+                 
+                      
+          .col-md-10.col-sm-8                   
+            #admin-dashboard
+              .row1
+                .col-lg-3
+                  .ibox.float-e-margins
+                    .ibox-title
+                      span.label.label-success.pull-right Total                                                     
+                      h5
+                        strong Income                                               
+                    .ibox-content
+                      h1.no-margins 40886,200                                   
+                .col-lg-3
+                  .ibox.float-e-margins
+                    .ibox-title
+                      span.label.label-info.pull-right Total                                                    
+                      h5
+                        strong Courses                                              
+                    .ibox-content
+                      h1.no-margins 275,800                                   
+                .col-lg-3
+                  .ibox.float-e-margins
+                    .ibox-title
+                      span.label.label-primary.pull-right All                                                     
+                      h5
+                        strong Learners                                               
+                    .ibox-content
+                      h1.no-margins.notification-learner
+
+                .col-lg-3
+                  .ibox.float-e-margins
+                    .ibox-title
+                      span.label.label-danger.pull-right All                                                     
+                      h5
+                        strong Trainer                                               
+                    .ibox-content
+                      h1.no-margins.notification-trainer
+          
+            #notification-admin
+              ul.request-list
+                each request in requests
+                  li.row.notification-request(id=request._id)
+                    .col-md-3
+                      img.img-responsive.img-rounded(src='/images/profile.jpg', width="150" alt='no photo')                
+                    .col-md-5.center1
+                      strong.text-uppercase #{request.name}               
+                    .col-md-2.center1
+                      a.btn-action.Approve(href='#') Approve                 
+                    .col-md-2.center1
+                      a.btn-reject.Reject(href='#') Reject 
+                hr 
+include ./partials/jscripts.jade  
+include footer.jade
+  script.
+    notify();
+    
+     function notify() {
+        setTimeout(notify,3000);
+       $.ajax({
+          url:'/admin/notification',
+          success: function(data){   
+            if(data.count == 0){
+               $('.notification-count').hide();
+            } else {
+              $('.notification-count').text(data.count); 
+              $('.notification-count').show();                          
+            }
+          },
+          error: function(jqXhr, textStatus, errorThrown){
+            
+          }
+        });
+       $.ajax({
+        url:'/admin/learner',
+        success: function(data){   
+          
+            $('.notification-learner').text(data.lcount); 
+            $('.notification-learner').show();                          
+          
+        },
+        error: function(jqXhr, textStatus, errorThrown){
+          
+        }
+      });
+         $.ajax({
+        url:'/admin/trainer',
+        success: function(data){   
+         
+            $('.notification-trainer').text(data.lcount); 
+            $('.notification-trainer').show();                          
+          
+        },
+        error: function(jqXhr, textStatus, errorThrown){
+          
+        }
+      });
+      }

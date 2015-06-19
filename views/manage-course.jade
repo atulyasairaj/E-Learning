@@ -1,0 +1,44 @@
+extends layout
+
+block content
+	.col-md-2.col-sm-2
+	.col-md-8.col-sm-8
+		// Nav tabs
+		ul#myTab.nav.nav-tabs(role='tablist')
+			li.active(role='presentation')
+				a(href='#courseware', aria-controls='courseware', role='tab', data-toggle='tab') Courseware
+			//li(role='presentation')
+				a(href='#sessions', aria-controls='sessions', role='tab', data-toggle='tab') Sessions
+		// Tab panes
+		.tab-content
+			#courseware.tab-pane.active(role='tabpanel')
+				.list-group.checkbox
+					a.list-group-item
+						p #{course.Title}
+							//#tab-bar-items
+								label
+									input(type='checkbox', value='')
+									| Select All
+								label
+									i.fa.fa-download
+									|  Download
+								label
+									i#cross.fa.fa-times
+									|  Delete
+						a.upload-bar.btn.btn-success.btn-sm(href='#' , id= course._id)
+							i.fa.fa-upload
+							|  Upload New Courseware
+						input.hidden(id="upload-course-content" type="file")
+					ul.courseware-list
+						each content in course.Content
+							li.list-group-item
+								label #{content.note_name}
+								.content-download
+									label
+										a(href="/course/download/" + content.note_name)
+											i.fa.fa-download.fa-2x
+									label
+										a.btn-delete(href='#' id=content._id)
+											i.cross.fa.fa-times.fa-2x
+			//#sessions.tab-pane.fade(role='tabpanel')
+	.col-md-2.col-sm-2

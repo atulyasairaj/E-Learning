@@ -1,0 +1,122 @@
+doctype html
+html
+	head
+		title= title
+		include ./partials/head.jade
+		include ./header.jade
+		style.
+			#l-video video{
+				width:100px;
+			}
+			#r-video video{
+				width:200px
+			}
+			#chat{
+				padding:0 25px;
+			}
+			#chat-window{
+				height:100%;
+			}
+		script(src='http://localhost:3000/javascripts/rtc.min.js')
+		script(src="http://localhost:9000/socket.io/socket.io.js")
+		script(src='http://localhost:3000/stylesheets/flat/dist/js/vendor/jquery.min.js')			
+	body
+		.container
+			.row
+				.col-md-8
+					#l-video
+					#r-video
+				.col-md-4.fixed
+					p#userEmail.hidden= name
+					p#roomName.hidden= roomid
+					#chat-window
+						div(id="chat" class="txtarea fullsz")
+							h4
+								p.pull-right(style="clear:right;")
+									span
+						input#msg(autocomplete="off" type="text" placeholder="Press enter to send message" class="fullsz form-control")
+		script.
+			$(document).ready(function() {
+				var socket = io("ws://localhost:9000");
+				var localuser = $('#userEmail').text();
+				var room = $('#roomName').text();
+				socket.emit('create', room);
+				$('#msg').keypress(function (e) {	
+					if(e.keyCode == 13){
+						if($('#msg').val() === '')
+							return false;
+						var msg = $('#msg').val();
+						var msgData = {
+							'user': localuser,
+							'msg' : msg
+						};
+						socket.emit('chat message', room ,msgData);
+
+						$('#chat').append("<div class='row'><p class='well well-sm pull-right' style='clear:right;'><span style='color:green;padding-left:5px;'>Me : </span>" + msgData.msg + "</p></div>");
+
+						$('#msg').val('');
+						
+						socket.emit("typing", false, room);
+					}
+				});
+
+
+				var typing = false;  
+				var timeout = undefined;
+
+				function timeoutFunction() {  
+					typing = false;
+					socket.emit("typing", false, room);
+				}
+
+				$("#msg").keypress(function(e){
+					if (e.which !== 13) {
+						if (typing === false && $("#msg").is(":focus")) {
+							typing = true;
+							socket.emit("typing", localuser, room);
+						} else {
+							clearTimeout(timeout);
+							timeout = setTimeout(timeoutFunction, 2000);
+						}
+					}
+				});
+
+				socket.on("isTyping", function(check, data) {  
+					if (check) {
+						
+							$("#chat").append("<div id='"+ data.id+"'><span class='text-muted glyphicon glyphicon-user' aria-hidden='true'></span><small>" + data.name + " is typing...</small></div>");
+							timeout = setTimeout(timeoutFunction, 2000);
+					
+					} else {
+							$("#"+data.id+"").remove();
+					}
+				});
+
+				socket.on('chat message', function(msg){
+					$('#chat').append("<div class='row'><p class='well well-sm pull-left' style='clear:right'><span style='color:red; padding-left: 5px;'>" + msg.user + "</span> : "+ msg.msg + "</p></div>");
+				});
+
+				socket.on('update', function(update){
+					$('#chat').append("<p class='text-center text-muted'>" + update + "</p>");
+				});
+				
+				var rtcOpts = {
+					room: room,
+					signaller: 'http://localhost:7000'
+				};
+				// call RTC module
+				var rtc = RTC(rtcOpts);
+				// A div element to show our local video stream
+				var localVideo = document.getElementById('l-video');
+				// A div element to show our remote video streams
+				var remoteVideo = document.getElementById('r-video');
+				
+				// Display local and remote video streams
+				localVideo.appendChild(rtc.local);
+				remoteVideo.appendChild(rtc.remote);
+
+				// Detect when RTC has established a session
+				rtc.on('ready');
+			});
+
+		include ./partials/jscripts.jade

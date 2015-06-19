@@ -1,0 +1,106 @@
+extends layout
+
+block content
+	#create-new-course.container
+		form#msform
+			ul#progressbar.text-center
+				li.active Create New Course
+				li Settings
+				li Pricing
+				li Creation
+			fieldset
+				h2.fs-title Start Building a Course
+				h3.fs-subtitle Step 1
+				.form-group
+					small Course Title :
+					input.form-control(type='text' name='course_title' placeholder='Enter Course Title' required)
+				.form-group
+					small Course Category :
+					select.form-control#course_category
+						option Web Development
+						option Mobile Development
+						option Database
+						option Music
+						option Photography
+						option Cloud Computing
+				.form-group.row
+					#featured_image.pull-left.col-md-3
+						small Course Image :
+						#course_image						
+							img#course-picture-upload(src='http://localhost:3000/images/add_image.png')
+						input(id="upload-course-pic" name="uploadcoursepic" type="file" accept="image/*")
+					.col-md-8
+						small Introductory :
+						textarea#course_introduction.form-control(rows='6' name="course_introduction" required)
+				.form-group
+					small Description :
+					textarea#course_description.form-control(rows='3' name="course_description" required)
+				.form-group
+					small Pre-Requisites :
+					textarea#course_prerequisites.form-control(rows='3' name="course_prerequisites" required)
+				.form-group
+					small Agenda :
+					textarea#course_agenda.form-control(rows='7' name="course_agenda" required)
+				.form-group
+					small Introduction Video :
+					input#course_introv(type="file" accept="video/*" name="course_introv" required)
+				button.next1.btn.pull-right.btn-success(type='button') Next
+				button.hidden.next(type='button') Hidden Next
+			fieldset
+				h2.fs-title Course Settings
+				h3.fs-subtitle Step 2
+				.form-group.form-inline
+					label Course Certificate :
+					.radio-inline
+						input.form-control(type='radio' name='certificate' value='yes' required)
+						|	Yes
+					.radio-inline
+						input.form-control(type='radio' name='certificate' checked="" value='no' required)
+						|	No
+				.form-group.form-inline
+					h6 Duration :
+					label Start Date :
+					input.form-control(type='date' name='start_course_date' required)
+					.pull-right
+						label End Date :
+						input.form-control(type='date' name='end_course_date' required)
+				.form-group.form-inline
+					label Course Level :
+					select#course_level.form-control(required)
+						option Basic
+						option Intermediate
+						option Expert
+				.form-group.form-inline
+					h6 Session :
+					label Session Start Time :
+					input.form-control#start_session_time(type='time' name='start_session_time' required)
+					.pull-right
+						label Session End Time :
+						input.form-control(type='time' name='end_session_time' required)
+				.form-group.form-inline
+					label Set Certificate Percentage :
+					input.form-control(type='number' name='percentage' min='1' max='100' required)
+					label&nbsp; out of 100
+				button.next2.btn.pull-right.btn-success(type='button') Next
+				button.hidden.next(type='button') Hidden Next
+				button.previous.btn.pull-right.btn-success(type='button') Previous
+			fieldset
+				h2.fs-title Set price for Course
+				h3.fs-subtitle Step 3
+				.form-group.form-inline
+					label Free Course :
+					.radio-inline
+						input.form-control(type='radio' name='coursecharge' checked="" value='yes' required)
+						|	Yes
+					.radio-inline
+						input.form-control(type='radio' name='coursecharge' value='no' required)
+						|	No
+				button.next3.btn.pull-right.btn-success(type='button') Next	
+				button.hidden.next(type='button') Hidden Next
+				button.previous.btn.pull-right.btn-success(type='button') Previous
+			fieldset
+				h2.fs-title Create course
+				h3.fs-subtitle Step 4
+				button#createcourse.btn.pull-right.btn-success(type='submit') Create Course
+				button.previous.btn.pull-right.btn-success(type='button') Previous
+				#error-course-creation.alert.hidden(role='alert')

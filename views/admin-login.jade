@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    include ./partials/head.jade
+    title= title
+  body   
+    nav.navbar.navbar-default.navbar-fixed-top#admin-header
+      .container
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          a.navbar-brand(href='/')
+            strong E-Learning       
+              
+    .col-md-4.col-sm-4
+    .col-md-4.col-sm-4
+      form#admin-login
+        .form-group
+          label Email
+           .input-group.margin-bottom-sm
+            span.input-group-addon
+             i.fa.fa-envelope-o.fa-fw
+            input.form-control.email(type='text', name='email')
+        .form-group
+          label Password
+           .input-group
+            span.input-group-addon
+             i.fa.fa-key.fa-fw
+            input.form-control.password(type='password', name='password')
+        button#admin-login.center-block.btn-action(type='submit') Login
+        #error-login.alert.alert-danger.hidden(role='alert')
+        hr 
+    .col-md-4.col-sm-4
+include ./partials/jscripts.jade  
+include footer.jade

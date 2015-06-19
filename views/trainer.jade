@@ -1,0 +1,216 @@
+doctype html
+html
+	head
+		title= title
+		include ./partials/head.jade
+		include ./header.jade
+		//- script(src='http://localhost:3000/javascripts/rtc.min.js')
+		//- script(src="http://localhost:9000/socket.io/socket.io.js")
+		//- script(src='http://localhost:3000/stylesheets/flat/dist/js/vendor/jquery.min.js')			
+	body
+		.container
+			#trainer
+				.row
+					.col-md-3.col-sm-4
+						.pagetitle
+							#item-header
+								#item-header-avatar
+									img.img-responsive.img-thumbnail(src='/images/profile.jpg' alt='no profile')
+								#item-header-content
+									h3 #{user.name}
+									i.fa.fa-location-arrow.fa-3.location &nbsp;
+										strong #{user.country}
+								#item-nav
+									#object-nav
+										ul
+											li#dashboard-personal-li.active
+												a(href='#dashboard-trainer') Dashboard
+											li#profile-personal-li
+												a(href='#profile-trainer') Profile
+											li#course-personal-li
+												a(href='#courses-trainer') Courses
+											//- li#notification-personal-li
+												a Notifications
+													span.badge 3
+											li#create-personal-li
+												a(href='/trainer/create') Create New Course
+													i.fa.fa-plus-circle.fa-2x.pull-right.text-danger
+					.col-md-9.col-sm-8
+						#dashboard-trainer
+							.row.learning-dashboard
+								.col-md-3.col-sm-6
+									.dash-widget.learning_commission
+										.dash-stats
+											h3 $0 
+												span TOTAL COMMISSION EARNED
+
+								.col-md-3.col-sm-6
+									.dash-widget.courses
+										.dash-stats
+											h3= trainings.length 
+												span COURSES INSTRUCTING
+
+								.col-md-3.col-sm-6
+									.dash-widget.quizes
+										.dash-stats
+											h3= courses.length
+												span.text-uppercase courses enrolled
+							.dash-widget.container.col-md-12
+								h4.dash_widget_title Statistics
+								canvas#myChart(width="400" height="400")
+
+						//-Courses
+						#courses-trainer
+							.row
+								#item-body
+									div(role='tabpanel')
+										ul.nav.nav-tabs(role='tablist')
+											li.active(role='presentation')
+												a(href='#personal-course' aria-controls='personal-course' role='tab' data-toggle='tab') MY COURSES
+											li(role='presentation')
+												a(href='#instructor-course' aria-controls='instructor-course' role='tab' data-toggle='tab') INSTRUCTING COURSES
+										.tab-content
+											#personal-course.tab-pane.active.fade.in(role='tabpanel')
+												.container-fluid
+													#pag-top-personal.row
+														nav
+															.pagination.pull-right
+																ul.pagination
+																	li.previous.disabled
+																		a(aria-label='Previous')
+																			span(aria-hidden='true')&laquo;
+																	li
+																		a 1
+																	li
+																		a 2
+																	li
+																		a 3
+																	li
+																		a(aria-label='Next')
+																			span(aria-hidden='true')&raquo;
+													#personal-course-list
+														ul
+															each course in courses
+																li.row
+																	.col-md-5.col-sm-7
+																		img.img-responsive.img-rounded.course-list-image(src=course.Details.Image_Path alt='no photo')
+																	.col-md-7.col-sm-9
+																		p
+																			strong.text-uppercase #{course.Title}
+																		//i.fa.fa-users.fa-2 &nbsp;
+																			a 3 STUDENTS
+																		p.giveMeEllipsis #{course.Details.Description}
+																		hr
+																		.row
+																			img.col-md-2.img-responsive.img-circle.trainer-profile(src='images/profile.jpg')
+																			.col-md-10
+																				strong #{course.Trainer_Id}
+																				//p
+																					strong 
+																						small B.E IT
+																				.text-right
+																					a(href="/course/learncourse/" + course._id).btn.btn-primary.btn-lg View Course
+											#instructor-course.tab-pane.fade.in(role='tabpanel')
+												.container-fluid
+													#pag-top-instructor.row
+														nav
+															.pagination.pull-right
+																ul.pagination
+																	li.previous.disabled
+																		a(aria-label='Previous')
+																			span(aria-hidden='true')&laquo;
+																	li
+																		a 1
+																	li
+																		a 2
+																	li
+																		a 3
+																	li
+																		a(aria-label='Next')
+																			span(aria-hidden='true')&raquo;
+													//-Instructor Courses
+													#instructor-course-list
+														ul
+															each training in trainings
+																li.row
+																	.col-md-5.col-sm-6
+																		img.img-responsive.img-rounded.course-list-image(src= training.Details.Image_Path alt='no photo')
+																	.col-md-7.col-sm-8
+																		p
+																			strong.text-uppercase #{training.Title}
+																		//i.fa.fa-users.fa-2 &nbsp;
+																			a 3 STUDENTS
+																		.row
+																			.col-md-3.col-xs-4
+																				a(href='/trainer/managecourse/'+ training._id)
+																					i.fa.fa-tasks.fa-5x
+																				p Manage Tasks
+																			.col-md-3.col-xs-4
+																				a(href='/course/video/'+ training._id)
+																					i.fa.fa-video-camera.fa-5x
+																				p Video Chat
+																			.col-md-3.col-xs-4
+																				a(href='/trainer/setexam/'+ training._id)
+																					i.fa.fa-newspaper-o.fa-5x
+																				p Set Exam
+																			.col-md-3.col-xs-4
+																				a(href='/course/liststudents/'+ training._id)
+																					i.fa.fa-users.fa-5x
+																				p Students
+																		.text-right
+																			a(href="/course/learncourse/" + training._id).btn.btn-primary.btn-lg View Course
+						//-Profile
+						#profile-trainer.white-body
+							form(role='form')
+								h3.text-info Profile
+								hr
+								.form-group
+									strong Name
+									input#name-trainer.form-control(type='text' value=user.name)
+								.form-group
+									strong Institute
+									input#institute-trainer.form-control(type='text' value=user.occupation)
+								.form-group
+									strong Location
+									input#location-trainer.form-control(type='text' value=user.country)
+								.form-group
+									strong Bio
+									textarea#bio-trainer.form-control(rows='3')
+								button#update-trainer-btn.btn.btn-lg.btn-warning.center-block Save Changes
+
+						//-Notifications
+						#notification-trainer
+							h1 James Bond
+		include ./partials/jscripts.jade
+		script.
+			var ctx = $("#myChart").get(0).getContext("2d");
+			// This will get the first returned node in the jQuery collection.
+			var myNewChart = new Chart(ctx);
+
+			var values = [#{data}];
+			var max_of_array = Math.max.apply(Math, values);
+
+			var data = {
+				labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+				datasets: [
+				{
+					label: "My first dataset",
+					fillColor: "rgba(151,187,205,0.2)",
+					strokeColor: "rgba(151,187,205,1)",
+					pointColor: "rgba(151,187,205,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(151,187,205,1)",
+					data: values
+				}
+				]
+			};
+			
+			var width = $('canvas').parent().width();
+			$('canvas').attr("width",width);
+			new Chart(ctx).Line(data, {
+				scaleOverride: true,
+				scaleSteps: max_of_array + 2,
+				scaleStepWidth: 1,
+				scaleStartValue: 0
+			});

@@ -1,0 +1,342 @@
+extends layout
+
+block content
+   .col-md-1.col-sm-1
+   .col-md-2.col-sm-2
+      img.left-img(src='/images/polls2_bg.png', width='180', height='600' alt='Profile Photo')
+   .col-md-6.col-sm-6.pageContent
+    #wrap
+      form
+        ul
+          h1.page-header
+            | Training Evaluation Form
+          li.form-line(data-type='control_text')
+                p Please use your experience in your training to rate the following statements.  Your feedback will help us to ensure that we continute to meet your training needs.
+                p
+                  span(style='font-size:small;')
+                    span
+                      strong= 'Course Title: ' + course_title
+                      p#course_id.hidden= id
+                p
+                  span(style='font-size:small;')
+                    span
+                      strong= 'Facilitator: ' + course_trainer
+          li
+                h3.page-header
+                  | Training Design
+          li.form-line
+            label.form-label(for='input_1')
+              | The Objectives were clearly communicated.
+              span#cross
+                | *
+            .form-input
+              table(summary='', cellpadding='4', cellspacing='0')
+                tbody
+                  tr
+                    th
+                    th(align='center')
+                      label(for='input_1_1')  1 
+                    th(align='center')
+                      label(for='input_1_2')  2 
+                    th(align='center')
+                      label(for='input_1_3')  3 
+                    th(align='center')
+                      label(for='input_1_4')  4 
+                    th(align='center')
+                      label(for='input_1_5')  5 
+                    th
+                  tr
+                    td
+                      label(for='input_1_1')  Disagree 
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q1_theObjectives', value='1', title='1')
+                    td(align='center')
+                      input.form-radio( type='radio', name='q1_theObjectives', value='2', title='2')
+                    td(align='center')
+                      input.form-radio( type='radio', name='q1_theObjectives', value='3', title='3')
+                    td(align='center')
+                      input.form-radio( type='radio', name='q1_theObjectives', value='4', title='4')
+                    td(align='center')
+                      input.form-radio( type='radio', name='q1_theObjectives', value='5', title='5')
+                    td
+                      label(for='input_1_5')  Agree 
+             hr
+          li.form-line
+            label.form-label(for='input_2') 
+              | The content of the training supported the objectives.
+              span#cross
+                | *
+            .form-input.jf-required
+              table(summary='', cellpadding='4', cellspacing='0')
+                tbody
+                  tr
+                    th
+                    th(align='center')
+                      label(for='input_2_1')  1 
+                    th(align='center')
+                      label(for='input_2_2')  2 
+                    th(align='center')
+                      label(for='input_2_3')  3 
+                    th(align='center')
+                      label(for='input_2_4')  4 
+                    th(align='center')
+                      label(for='input_2_5')  5 
+                    th
+                  tr
+                    td
+                      label(for='input_2_1')  Disagree 
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q2_theObjectives', value='1', title='1')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q2_theObjectives', value='2', title='2')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q2_theObjectives', value='3', title='3')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q2_theObjectives', value='4', title='4')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q2_theObjectives', value='5', title='5')
+                    td
+                      label(for='input_2_5')  Agree
+             hr
+          li.form-line.jf-required(data-type='control_scale')
+            label.form-label(for='input_3')
+              | The topics were well organized.
+              span#cross
+                | *
+            .form-input.jf-required
+              table.form-scale-table(summary='', cellpadding='4', cellspacing='0')
+                tbody
+                  tr
+                    th
+                    th(align='center')
+                      label(for='input_3_1')  1 
+                    th(align='center')
+                      label(for='input_3_2')  2 
+                    th(align='center')
+                      label(for='input_3_3')  3 
+                    th(align='center')
+                      label(for='input_3_4')  4 
+                    th(align='center')
+                      label(for='input_3_5')  5 
+                    th
+                  tr
+                    td
+                      label(for='input_3_1')  Disagree 
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q3theTopics', value='1', title='1')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q3theTopics', value='2', title='2')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q3theTopics', value='3', title='3')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q3theTopics', value='4', title='4')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q3theTopics', value='5', title='5')
+                    td
+                      label(for='input_3_5')  Agree
+             hr
+          li.form-line.jf-required(data-type='control_scale')
+            label.form-label(for='input_4')
+              | The course length was appropriate for the information presented.
+              span#cross
+                | *
+            .form-input.jf-required
+              table.form-scale-table(summary='', cellpadding='4', cellspacing='0')
+                tbody
+                  tr
+                    th
+                    th(align='center')
+                      label(for='input_4_1')  1 
+                    th(align='center')
+                      label(for='input_4_2')  2 
+                    th(align='center')
+                      label(for='input_4_3')  3 
+                    th(align='center')
+                      label(for='input_4_4')  4 
+                    th(align='center')
+                      label(for='input_4_5')  5 
+                    th
+                  tr
+                    td
+                      label(for='input_4_1')  Disagree 
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q4_theCourse', value='1', title='1')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q4_theCourse', value='2', title='2')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q4_theCourse', value='3', title='3')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q4_theCourse', value='4', title='4')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q4_theCourse', value='5', title='5')
+                    td
+                      label(for='input_4_5')  Agree
+             hr       
+          li.form-input-wide(data-type='control_head')
+            .form-header-group
+              .header-text.httal.htvam
+                h3.form-header
+                  | Facilitator
+          li.form-line.jf-required(data-type='control_scale')
+            label.form-label.form-label-left.form-label-auto(for='input_5')
+              | The facilitator created a professional and comfortable learning environment.
+              span#cross
+                | *
+            .form-input.jf-required
+              table.form-scale-table(summary='', cellpadding='4', cellspacing='0')
+                tbody
+                  tr
+                    th
+                    th(align='center')
+                      label(for='input_5_1') 1 
+                    th(align='center')
+                      label(for='input_5_2') 2 
+                    th(align='center')
+                      label(for='input_5_3') 3 
+                    th(align='center')
+                      label(for='input_5_4') 4 
+                    th(align='center')
+                      label(for='input_5_5') 5 
+                    th
+                  tr
+                    td
+                      label(for='input_5_1')  Disagree 
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q5_theFacilitator', value='1', title='1')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q5_theFacilitator', value='2', title='2')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q5_theFacilitator', value='3', title='3')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q5_theFacilitator', value='4', title='4')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q5_theFacilitator', value='5', title='5')
+                    td
+                      label(for='input_5_5')  Agree
+             hr
+          li.form-line.jf-required
+            label.form-label(for='input_6')
+              | The facilitator displayed confidence in the subject matter.
+              span#cross
+                | *
+            .form-input.jf-required
+              table.form-scale-table(summary='', cellpadding='4', cellspacing='0')
+                tbody
+                  tr
+                    th
+                    th(align='center')
+                      label(for='input_6_1')  1 
+                    th(align='center')
+                      label(for='input_6_2')  2 
+                    th(align='center')
+                      label(for='input_6_3')  3 
+                    th(align='center')
+                      label(for='input_6_4')  4 
+                    th(align='center')
+                      label(for='input_6_5')  5 
+                    th
+                  tr
+                    td
+                      label(for='input_6_1')  Disagree 
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q6_theFacilitator', value='1', title='1')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q6_theFacilitator', value='2', title='2')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q6_theFacilitator', value='3', title='3')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q6_theFacilitator', value='4', title='4')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q6_theFacilitator', value='5', title='5')
+                    td
+                      label(for='input_6_5')  Agree 
+             hr
+          li.form-line
+            label.form-label(for='input_7')
+              | The facilitator promoted critical thinking and self-directed learning.
+              span#cross
+                | *
+            .form-input.jf-required
+              table.form-scale-table(summary='', cellpadding='4', cellspacing='0')
+                tbody
+                  tr
+                    th
+                    th(align='center')
+                      label(for='input_7_1')  1 
+                    th(align='center')
+                      label(for='input_7_2')  2 
+                    th(align='center')
+                      label(for='input_7_3')  3 
+                    th(align='center')
+                      label(for='input_7_4')  4 
+                    th(align='center')
+                      label(for='input_7_5')  5 
+                    th
+                  tr
+                    td
+                      label(for='input_7_1')  Disagree 
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q7_theFacilitator', value='1', title='1')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q7_theFacilitator', value='2', title='2')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q7_theFacilitator', value='3', title='3')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q7_theFacilitator', value='4', title='4')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q7_theFacilitator', value='5', title='5')
+                    td
+                      label(for='input_7_5')  Agree
+             hr
+          li.form-line
+            label.form-label.form-label-left.form-label-auto(for='input_8')
+              | Overall Rating
+              span#cross
+                | *
+            .form-input.jf-required
+              table.form-scale-table(summary='', cellpadding='4', cellspacing='0')
+                tbody
+                  tr
+                    th
+                    th(align='center')
+                      label(for='input_8_1')  1 
+                    th(align='center')
+                      label(for='input_8_2')  2 
+                    th(align='center')
+                      label(for='input_8_3')  3 
+                    th(align='center')
+                      label(for='input_8_4')  4 
+                    th(align='center')
+                      label(for='input_8_5')  5 
+                    th
+                  tr
+                    td
+                      label(for='input_8_1')  Worst
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q8_theFacilitator', value='1', title='1')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q8_theFacilitator', value='2', title='2')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q8_theFacilitator', value='3', title='3')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q8_theFacilitator', value='4', title='4')
+                    td(align='center')
+                      input.form-radio(required, type='radio', name='q8_theFacilitator', value='5', title='5')
+                    td
+                      label(for='input_8_5')  Best
+             hr
+          li.form-input-wide
+            .form-header-group
+              .header-text.httal.htvamt
+                  | Comments
+          li.form-line(data-type='control_textarea')
+            label.form-label.form-label-left.form-label-auto(for='input_28')  Please provide any additional comments about the training: 
+            .form-input.jf-required
+              textarea.comment.form-textarea(name='comment', cols='40', rows='6')
+          li.form-line(data-type='control_button')
+            .form-input-wide
+              .form-buttons-wrapper(style='margin-right:273px')
+                button.btn.btn-action.btn-block.btnFeedbackSubmit(type='submit')
+                  | Submit Form
+    .col-md-8.col-sm-2
+      #error-feedback.alert.hidden(role='alert')

@@ -1,0 +1,62 @@
+-if(isLoggedIn == false || !isLoggedIn)
+	nav#mainNav.navbar.navbar-default.navbar-fixed-top.affix(style="background-color:#f8f8f8")
+		.container-fluid
+			// Brand and toggle get grouped for better mobile display
+			.navbar-header
+				button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+					span.sr-only Toggle navigation
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+				a.navbar-brand.page-scroll(href='/')
+					i.fa.fa-x.fa-graduation-cap 
+						span E-Learning
+				// Collect the nav links, forms, and other content for toggling
+			if(hide != 'true')
+				#bs-example-navbar-collapse-1.collapse.navbar-collapse
+					ul.nav.navbar-nav.navbar-right
+						li
+							a(href='/#about') About
+						li
+							a(href='/#services') Services
+						li
+							a(href='/#portfolio') Courses
+						li
+							a(href='/#contact') Contact
+						.navbar-form.navbar-left
+							form.navbar-left(action="/signup")
+								button.btn-nav.btn.btn-default(type="submit") Sign Up
+							form.navbar-left(action='/?redirect=/trainer')
+								button.btn-nav.btn.btn-default.btn-border#login-button(type='submit') Sign In
+
+										
+
+-else
+	nav#mainNav.navbar.navbar-default.navbar-fixed-top.affix(style="background-color:#f8f8f8")
+		.container-fluid
+			// Brand and toggle get grouped for better mobile display
+			.navbar-header
+				button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+					span.sr-only Toggle navigation
+					span.icon-bar
+					span.icon-bar
+					span.icon-bar
+				a.navbar-brand.page-scroll(href='/')
+					i.fa.fa-x.fa-graduation-cap 
+						span E-Learning
+				// Collect the nav links, forms, and other content for toggling
+			#bs-example-navbar-collapse-1.collapse.navbar-collapse
+				.nav.navbar-form.navbar-nav.navbar-right
+					.navbar-right
+						button.btn-nav.btn.btn-default#logout(type="button") Logout
+				ul.nav.navbar-nav.navbar-right
+					li
+						a(href= type) Profile
+					li
+						a(href='/#about') About
+					li
+						a(href='/#services') Services
+					li
+						a(href='/#portfolio') Courses
+					li
+						a(href='/#contact') Contact

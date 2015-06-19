@@ -1,0 +1,47 @@
+-if(isLoggedIn == false || !isLoggedIn)
+    nav#hover-navbar.navbar-fixed-top(role='banner')
+        .container
+            .row
+                .col-sm-2.navbar-brand
+                    a(href='/')
+                        img(src='/images/e-learngging-logo.png', alt='E-Learning', width='160px')
+                #menu-move.col-sm-10
+                    nav#hover-navbar
+                        ul
+                            li.hover-shadow
+                                a(href='http://localhost:3000/') Home
+                            li.hover-shadow
+                                a(href='#') About
+                            li.hover-shadow
+                                a(href='#') Courses
+                            li.hover-shadow
+                                a(href='#') Contact Us
+                            if(hide != 'true')
+                                ul#menu
+                                    li.hover-shadow
+                                        button#login-button.btn-action(type='button' data-toggle='modal' data-target='#loginModal') Sign In
+
+-else
+    nav#hover-navbar.navbar-fixed-top(role='banner')                            
+        .container      
+            .row
+                .col-sm-2.navbar-brand
+                        a(href='/')
+                            img(src='/images/e-learngging-logo.png', alt='E-Learning', width='160px')
+                #menu-move.col-sm-10
+                    nav#hover-navbar
+                        ul
+                            li.dropdown
+                                a(href='http://localhost:3000/') Home
+                            li.dropdown
+                                a(href= type) Profile
+                            li.dropdown
+                                a(href='#') About
+                            li.dropdown
+                                a(href='#') Courses
+                            li.dropdown
+                                a(href='#') Contact Us                            
+                            ul#menu
+                                li
+                                    a#logout.btn-action.navbar-btn(href='#') Log Out
+

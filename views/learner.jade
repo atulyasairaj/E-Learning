@@ -1,0 +1,181 @@
+doctype html
+html
+	head
+		title= title
+		include ./partials/head.jade
+		include ./header.jade
+		//- script(src='http://localhost:3000/javascripts/rtc.min.js')
+		//- script(src="http://localhost:9000/socket.io/socket.io.js")
+		//- script(src='http://localhost:3000/stylesheets/flat/dist/js/vendor/jquery.min.js')			
+	body
+		.container
+			#learner
+				.row
+					.col-md-3.col-sm-4
+						.pagetitle
+							#item-header
+								#item-header-avatar
+									img.img-responsive.img-thumbnail(src='/images/profile.jpg' alt='no profile')
+								#item-header-content
+									h3.text-uppercase= user.name
+									i.fa.fa-location-arrow.fa-3.location &nbsp;
+										strong= user.country
+								#item-nav
+									#object-nav
+										ul
+											li#dashboard-personal-li.active
+												a(href='#dashboard-learner') Dashboard
+											li#profile-personal-li
+												a(href='#profile-learner') Profile
+											li#course-personal-li
+												a(href='#courses-learner') Courses
+											//- li#notification-personal-li
+												a Notifications
+													span.badge 3
+											-if(user.request == false)
+												li#trainer-approval-personal-li
+													a(data-toggle="modal" data-target="#trainerApproval" href='#dashboard-learner') Become Trainer
+											
+											
+					.col-md-9.col-sm-8
+						#dashboard-learner
+							.row.learning-dashboard
+								.col-md-3.col-sm-6
+									.dash-widget.courses
+										.dash-stats
+											if(courses!=null)
+												h3 #{courses.length}
+													span COURSES Enrolled
+											else
+												h3 0
+													span COURSES Enrolled
+
+								//- .col-md-3.col-sm-6
+									.dash-widget.quizes
+										.dash-stats
+											h3 5
+												span QUIZES Answered
+							.dash-widget.container.col-md-12
+								h4.dash_widget_title Statistics
+								canvas#myChart(width="400" height="400")
+
+						//-Courses
+						#courses-learner
+							.row
+								#item-body
+									div(role='tabpanel')
+										ul.nav.nav-tabs(role='tablist')
+											li.active(role='presentation')
+												a(href='#personal-course' aria-controls='personal-course' role='tab' data-toggle='tab') MY COURSES
+										.tab-content
+											#personal-course.tab-pane.active.fade.in(role='tabpanel')
+												.container-fluid
+													#pag-top-personal.row
+														nav
+															.pagination.pull-right
+																ul.pagination
+																	li.previous.disabled
+																		a(aria-label='Previous')
+																			span(aria-hidden='true')&laquo;
+																	li
+																		a 1
+																	li
+																		a 2
+																	li
+																		a 3
+																	li
+																		a(aria-label='Next')
+																			span(aria-hidden='true')&raquo;
+													#personal-course-list
+														ul
+															if(courses!=null)
+																each course in courses
+																	li.row
+																		.col-md-5.col-sm-7
+																			img.img-responsive.img-rounded.course-list-image(src="#{course.Details.Image_Path}" alt='no photo')
+																		.col-md-7.col-sm-9
+																			p 
+																				strong.text-uppercase #{course.Title}
+																			-//i.fa.fa-users.fa-2 &nbsp;
+																				-//a 3 STUDENTS
+																			p.giveMeEllipsis #{course.Details.Description}
+																			hr
+																			.row
+																				img.col-md-2.img-responsive.img-circle.learner-profile(src='images/profile.jpg')
+																				.col-md-10
+																					strong #{course.Trainer_Id}
+																					//p
+																						strong
+																							small B.E IT
+																					.text-right
+																						a(href="/course/learncourse/" + course._id).btn.btn-primary.btn-lg View Course
+						//-Profile
+						#profile-learner.white-body
+							form(role='form')
+								h3.text-info Profile
+								hr
+								.form-group
+									strong Name
+									input#name-learner.form-control(type='text' value='#{user.name}')
+								.form-group
+									strong Occupation
+									input#institute-learner.form-control(type='text' value='#{user.occupation}')
+								.form-group
+									strong Location
+									input#location-learner.form-control(type='text' value='#{user.country}')
+								.form-group
+									strong Bio
+									textarea#bio-learner.form-control(rows='3')
+								button#update-learner-btn.btn.btn-lg.btn-warning.center-block Save Changes
+
+						//-Notifications
+						#notification-learner
+							h1 James Bond
+
+			.container
+				#trainerApproval.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+					.modal-dialog
+						.modal-content
+							.modal-header
+								button.close(type='button', data-dismiss='modal', aria-label='Close')
+									span(aria-hidden='true') &times;
+								h4#myModalLabel.modal-title.text-center Trainer Request
+								
+							.modal-body
+								h4 Send Request to be a Trainer? 
+							.modal-footer
+								button.btn.btn-default.modal-dismiss(type='button', data-dismiss='modal' href="#dashboard-learner") No				     
+								button.btn.btn-primary#sendRequest(type='button') Yes
+		include ./partials/jscripts.jade
+		script.
+			var ctx = $("#myChart").get(0).getContext("2d");
+			// This will get the first returned node in the jQuery collection.
+			var myNewChart = new Chart(ctx);
+
+			var values = [#{data}];
+			var max_of_array = Math.max.apply(Math, values);
+
+			var data = {
+				labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+				datasets: [
+				{
+					label: "My first dataset",
+					fillColor: "rgba(151,187,205,0.2)",
+					strokeColor: "rgba(151,187,205,1)",
+					pointColor: "rgba(151,187,205,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(151,187,205,1)",
+					data: values
+				}
+				]
+			};
+			
+			var width = $('canvas').parent().width();
+			$('canvas').attr("width",width);
+			new Chart(ctx).Line(data, {
+				scaleOverride: true,
+				scaleSteps: max_of_array + 2,
+				scaleStepWidth: 1,
+				scaleStartValue: 0
+			});
