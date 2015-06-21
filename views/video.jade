@@ -37,7 +37,7 @@ html
 						input#msg(autocomplete="off" type="text" placeholder="Press enter to send message" class="fullsz form-control")
 		script.
 			$(document).ready(function() {
-				var socket = io("ws://localhost:9000");
+				var socket = io("ws://elearning-sawantinfotech.rhcloud.com:8000");
 				var localuser = $('#userEmail').text();
 				var room = $('#roomName').text();
 				socket.emit('create', room);
@@ -102,7 +102,7 @@ html
 				
 				var rtcOpts = {
 					room: room,
-					signaller: 'http://localhost:7000'
+					signaller: 'https://switchboard.rtc.io'
 				};
 				// call RTC module
 				var rtc = RTC(rtcOpts);
