@@ -416,7 +416,7 @@ $("#msform").submit(function(e){
 	var path = "/content/";
 	//Binary js image upload
 	$('#createcourse').next().remove();
-	$('#createcourse').addClass('btn-disabled');
+	$('#createcourse').attr('disabled', "disabled");
 	$('#createcourse').text('Creating Course....');
 	var title= $("#msform").find("input[name='course_title']").val(),
 	category = $("#msform").find("#course_category option:selected").val(),
