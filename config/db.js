@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 function mongoConnect()
 {
-    mongoose.connect('mongodb://admin:SggWJKCD4rTb@elearning-sawantinfotech.rhcloud.com:27017/');
+    mongoose.connect('mongodb://admin:SggWJKCD4rTb@elearning-sawantinfotech.rhcloud.com:27017');
 
     var db = mongoose.connection;
 
