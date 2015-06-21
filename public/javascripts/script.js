@@ -1,7 +1,7 @@
 //paste this code under head tag or in a seperate js file.
 // Wait for window load
 
-var client = new BinaryClient('ws://localhost:9000/binary-endpoint');
+var client = new BinaryClient('ws://127.12.133.130/binary-endpoint');
 
 $(window).load(function() {
 	// Animate loader off screen
