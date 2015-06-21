@@ -135,7 +135,7 @@ io.set('destroy upgrade', false);
 io.set('transports', ['websocket', 'polling']);
 
 var BinaryServer = require('binaryjs').BinaryServer;
-var bs = BinaryServer({server: http, path:'/binary-endpoint'});
+var bs = BinaryServer({port: 8000, path:'/binary-endpoint'});
 
 var socket  = require('./config/socket')(io);
 var binary  = require('./config/binaryjs')(bs);
