@@ -25,7 +25,7 @@ html
 						input#msg(autocomplete="off" type="text" placeholder="Press enter to send message" class="fullsz form-control")
 		script.
 			$(document).ready(function() {
-				var socket = io("ws://127.12.133.130");
+				var socket = io("ws://" + location.host);
 				var localuser = $('#userEmail').text();
 				var room = $('#roomName').text();
 				socket.emit('create', room);
